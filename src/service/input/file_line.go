@@ -24,10 +24,18 @@ func NewLine(fileLine string) Line {
 
 // IsChromatoNameLine return true if line is a type of chromatogram name
 func (l Line) IsChromatoNameLine() bool {
-	if len(l.words) < 2 {
+	if len(l.words) < 3 {
 		return false
 	}
 	return l.words[0] == "Sample" && l.words[1] == "Name"
+}
+
+// FindChromatoName return a name
+func (l Line) FindChromatoName() (string, error) {
+	if !l.IsChromatoNameLine() {
+		return "", fmt.Errorf("line is invalid")
+	}
+	return l.words[2], nil
 }
 
 // IsPeekLine return true if line is a type of peek

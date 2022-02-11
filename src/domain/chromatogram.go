@@ -24,3 +24,11 @@ func (c *Chromatogram) FindPeek(id int) (*Peek, error) {
 	}
 	return peek, nil
 }
+
+// NewChromatogram return a blank chromatogram
+func NewChromatogram(name string) *Chromatogram {
+	return &Chromatogram{
+		Name:     name,
+		peeksMap: make(map[int]*Peek),
+	}
+}

@@ -7,21 +7,26 @@ type Peek struct {
 	Area          int
 }
 
-// Rename return the renamed peek
-func (p Peek) Rename(newName string) Peek {
-	return Peek{
-		Name:          newName,
-		RetentionTime: p.RetentionTime,
-		Area:          p.Area,
-	}
+// Rename change peek name
+func (p *Peek) Rename(newName string) {
+	p.Name = newName
 }
 
 // AreaRatio return the area ratio of total area
-func (p Peek) AreaRatio(totalArea int) float64 {
+func (p *Peek) AreaRatio(totalArea int) float64 {
 	return float64(p.Area) / float64(totalArea)
 }
 
 // RelativeRT return the relative retention time (RRT)
-func (p Peek) RelativeRT(baseRT float64) float64 {
+func (p *Peek) RelativeRT(baseRT float64) float64 {
 	return p.RetentionTime / baseRT
+}
+
+// NewUnnamedPeek return a no name peek.
+func NewUnnamedPeek(retentionTime float64, area int) *Peek {
+	return &Peek{
+		Name:          "",
+		RetentionTime: retentionTime,
+		Area:          area,
+	}
 }

@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -15,8 +14,7 @@ type Experiment struct {
 func (exp Experiment) AddChromatogram(chromatgram Chromatogram) error {
 	_, exist := exp.chromatogramMap[chromatgram.Name]
 	if exist {
-		message := fmt.Sprintf(`%v exist. chromatogram name must be unique`, chromatgram.Name)
-		return errors.New(message)
+		return fmt.Errorf(`%v exist. chromatogram name must be unique`, chromatgram.Name)
 	}
 	exp.chromatogramMap[chromatgram.Name] = chromatgram
 	return nil
